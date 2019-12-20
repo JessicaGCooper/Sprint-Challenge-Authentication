@@ -13,6 +13,12 @@ server.use(cors());
 server.use(express.json());
 
 server.use('/api/auth', authRouter);
-server.use('/api/jokes', authenticate, jokesRouter);
+server.use('/api/jokes', authenticate, jokesRouter);//removed authenticate middleware
+
+server.get("/api/auth", (req, res) => {
+    res.status(200).json({ api: "up", dbenv: process.env.DB_ENV });
+  });
+
+
 
 module.exports = server;
