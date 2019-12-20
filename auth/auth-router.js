@@ -4,6 +4,20 @@ const jwt = require("jsonwebtoken");
 
 const Users = require('./auth-model.js');
 
+router.get('/users', (req, res) => {
+  Users.find()
+  .then(users => {
+    res
+    .status(200)
+    .json(users)
+  })
+  .catch(error => {
+    res
+    .status(500)
+    .json({ message: "The server could not retrieve the list of users.", error })
+  })
+})
+
 router.post('/register', (req, res) => {
   // implement registration
   let user = req.body;

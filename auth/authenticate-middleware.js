@@ -5,8 +5,11 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
+  const { authorization } = req.headers;
+  console.log(authorization)
+
   if (authorization) {
-    const secret = process.env.JWT_SECRET || "The little boy jumped to see such fun, & the cow ran away with the spoon!";
+    const secret = process.env.JWT_SECRET || "The little boy jumped to see such fun, & the cow ran away with the spoon!"
 
     jwt.verify(authorization, secret, function(error, decodedToken){
       if(error){
@@ -21,6 +24,6 @@ module.exports = (req, res, next) => {
   } else {
     res
     .status(400)
-    .json({ message: "Please login and try again."})
+    .json({ message: "Please login and try again." })
   }
 };
